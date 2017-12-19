@@ -1,14 +1,9 @@
 package main.java;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import com.sun.net.httpserver.HttpServer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.InetSocketAddress;
 
 public class json_validate {
@@ -29,7 +24,15 @@ public class json_validate {
                         //as a bridge between byte streams and character streams:  It reads bytes and decodes them into characters using a specified charset.
                         //Parameter of InputStreamReader is InputStream, which we get from method getRequestBody, which
                         //returns a InputStream for reading the request body.
-                        String request = bufferedReader.readLine();     //And now we convert it to string
+                        String buildString = bufferedReader.readLine();         //Buffer line
+                        StringBuilder stringBuilder = new StringBuilder();      //Here we read until EOF and building
+                        // a line, containing our request
+                        while (buildString != null) {
+                                stringBuilder.append(buildString);
+                                buildString = bufferedReader.readLine();
+                        }
+                        String request = stringBuilder.toString();
+
                         System.out.println("Request: " + request);      //Shows the request
                         String response = null;                         //Response is empty at the start
 
@@ -50,9 +53,9 @@ public class json_validate {
                                 error.addProperty("errorPlace", errorPlace);
                                 error.addProperty("request-id", id);
                                 response = gson.toJson(error);
-                        } finally {id++;}
-
-                        System.out.println("Response:" + response);     //Shows the response
+                        }
+                        id = id + 1;
+                        System.out.println("Response: " + response);     //Shows the response
 
                         //Sending the response and closing
                         httpExchange.sendResponseHeaders(CODE, response.length());
