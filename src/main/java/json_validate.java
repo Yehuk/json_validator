@@ -51,6 +51,7 @@ public class json_validate {
                                 error.addProperty("errorCode", errorCode);
                                 error.addProperty("errorMessage", errorMessage);
                                 error.addProperty("errorPlace", errorPlace);
+                                error.addProperty("resource", httpExchange.getRequestURI().getPath());
                                 error.addProperty("request-id", id);
                                 response = gson.toJson(error);
                         }
