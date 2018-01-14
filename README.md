@@ -1,13 +1,13 @@
 # json validator
 Simple json validator
 # Usage v1:
-1)docker build -t validator github.com/Yehuk/json_validator
-2)docker run -d --rm -p 80:80 validator
-3)curl -s --upload-file filename.json http://localhost
+1) docker build -t validator github.com/Yehuk/json_validator
+2) docker run -d --rm -p 80:80 validator
+3) curl -s --upload-file filename.json http://localhost
 # Usage v2:
-1)./gradlew docker
-2)docker run -d --rm -p 80:80 validator:0.1
-3)curl -s --upload-file filename.json http://localhost
+1) ./gradlew docker
+2) docker run -d --rm -p 80:80 validator:0.1
+3) curl -s --upload-file filename.json http://localhost
 # Result:
 1) If everything ok you will get your .jsonfile
 2) If not, you will get error mesage with this structure:
