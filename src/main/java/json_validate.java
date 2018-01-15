@@ -15,7 +15,7 @@ public class json_validate {
 
         /**
          * Try to validate json file
-         * @param server
+         * @param server is newly created server in 'main' function, we use this param to bind server and create context
          * @throws IOException
          */
 
@@ -78,7 +78,6 @@ public class json_validate {
 
         /**
          * Main is used to start server and handle recieved json files
-         * @param args
          * @throws IOException
          */
         public static void main(String[] args) throws IOException {
@@ -89,13 +88,13 @@ public class json_validate {
 
         /**
          * Bind and start listening
-         * @param server
+         * @param server we start server, that we get as a param
          */
         private static void start(HttpServer server){server.start();}
 
         /**
          * Stop the work
-         * @param server
+         * @param server we close server, that we get as a param
          */
          private static void stop(HttpServer server){server.stop(0);}
 
