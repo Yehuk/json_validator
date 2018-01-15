@@ -6,11 +6,18 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.*;
 import java.net.InetSocketAddress;
 
+/**
+ * Class to implement server and validate json files
+ */
 public class json_validate {
         private static final int PORT = 80;     //We listen this port
         private static final int CODE = 200;    //Reply code
 
-
+        /**
+         * Try to validate json file
+         * @param server
+         * @throws IOException
+         */
 
         public json_validate(HttpServer server) throws IOException {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();        //We create GsonBuilder and
@@ -51,7 +58,7 @@ public class json_validate {
                                 error.addProperty("errorCode", errorCode);
                                 error.addProperty("errorMessage", errorMessage);
                                 error.addProperty("errorPlace", errorPlace);
-                                error.addProperty("resource", httpExchange.getRequestURI().getPath());
+                                error.addProperty("resource", request);
                                 error.addProperty("request-id", id);
                                 response = gson.toJson(error);
                         }
@@ -69,14 +76,27 @@ public class json_validate {
         }
 
 
-
+        /**
+         * Main is used to start server and handle recieved json files
+         * @param args
+         * @throws IOException
+         */
         public static void main(String[] args) throws IOException {
                 final HttpServer server = HttpServer.create();  //We create server
                 json_validate json = new json_validate(server);
                 json.start(server);                             //We launch server
         }
 
-        private static void start(HttpServer server){server.start();}   //Bind and start listening
-        private static void stop(HttpServer server){server.stop(0);}    //Stop the work
+        /**
+         * Bind and start listening
+         * @param server
+         */
+        private static void start(HttpServer server){server.start();}
+
+        /**
+         * Stop the work
+         * @param server
+         */
+         private static void stop(HttpServer server){server.stop(0);}
 
 }
