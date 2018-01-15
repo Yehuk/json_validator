@@ -1,0 +1,25 @@
+pipeline {
+    agent { docker 'validator' } 
+    stages {
+        stage('Step 1 - building') {
+            steps {
+                sh 'docker build -t validator github.com/Yehuk/json_validator'
+                echo 'Step 1 executed, Gorlyak N.S.'
+            }
+        }
+        stage('Step 2 - starting') {
+            steps {
+                sh 'docker run -d --rm -p 80:80 validator'
+                echo 'Step 2 executed, Gorlyak N.S.'
+            }
+        }
+        stage('Step 3 - working') {
+            steps {
+                echo 'Step 3 executed, Gorlyak N.S.'
+                echo 'Now use:'
+                echo 'curl -s --upload-file filename.json http://localhost'
+                echo 'to validate your file!'
+            }
+        }
+    }
+}
