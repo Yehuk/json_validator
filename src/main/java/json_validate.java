@@ -22,7 +22,7 @@ public class json_validate {
         /**
          * Try to validate json file
          * @param server is newly created server in 'main' function, we use this param to bind server and create context
-         * @throws IOException
+         * @throws IOException this exception can happen when something wrong with input/output operations
          */
 
         public json_validate(HttpServer server) throws IOException {
@@ -137,7 +137,7 @@ public class json_validate {
 
         /**
          * Main is used to start server and handle recieved json files
-         * @throws IOException
+         * @throws IOException this exception can happen when something wrong with input/output operations
          */
         public static void main(String[] args) throws IOException {
                 /**
